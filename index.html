@@ -150,6 +150,97 @@
 
       <div id="guestbookList" class="guestbook-list"></div>
     </section>
+
+    <section class="section rsvp reveal">
+  <p class="section__eyebrow">ATTENDANCE</p>
+  <h2>참석 여부</h2>
+
+  <p class="rsvp__intro">
+    소중한 날, 함께해 주실 수 있는지<br>
+    참석 여부를 미리 알려주세요.
+  </p>
+
+  <form id="rsvpForm" class="rsvp-form">
+
+    <input
+      type="text"
+      id="rsvpName"
+      placeholder="이름"
+      maxlength="20"
+      required
+    >
+
+    <div class="rsvp-choice">
+      <p class="rsvp-label">참석 여부</p>
+
+      <label>
+        <input
+          type="radio"
+          name="attending"
+          value="true"
+          required
+        >
+        <span>참석합니다</span>
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="attending"
+          value="false"
+        >
+        <span>참석하지 못합니다</span>
+      </label>
+    </div>
+
+    <div class="rsvp-choice">
+      <p class="rsvp-label">동반 인원 (본인 제외)</p>
+
+      <div class="guest-count">
+        <button type="button" id="guestMinus">−</button>
+        <span id="guestCount">0</span>
+        <button type="button" id="guestPlus">＋</button>
+      </div>
+    </div>
+
+    <div class="rsvp-choice">
+      <p class="rsvp-label">식사 여부</p>
+
+      <label>
+        <input
+          type="radio"
+          name="meal"
+          value="true"
+          checked
+        >
+        <span>식사합니다</span>
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="meal"
+          value="false"
+        >
+        <span>식사하지 않습니다</span>
+      </label>
+    </div>
+
+    <textarea
+      id="rsvpMessage"
+      placeholder="전달사항 (선택)"
+      maxlength="300"
+    ></textarea>
+
+    <button
+      type="submit"
+      class="button rsvp-submit"
+    >
+      참석 여부 보내기
+    </button>
+
+  </form>
+</section>
     
     <section class="section contact reveal">
       <p class="section__eyebrow">CONTACT</p>

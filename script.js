@@ -6,6 +6,110 @@ const SUPABASE_KEY = "sb_publishable_2KVALB3FagZbWx4nmEOwuA_URV7KfYg";
 
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+const rsvpForm = document.getElementById("rsvpForm");
+const rsvpName = document.getElementById("rsvpName");
+const rsvpMessage = document.getElementById("rsvpMessage");
+
+const guestCountElement =
+  document.getElementById("guestCount");
+
+const guestMinus =
+  document.getElementById("guestMinus");
+
+const guestPlus =
+  document.getElementById("guestPlus");
+
+let rsvpGuestCount = 0;
+
+function updateGuestCount() {
+  guestCountElement.textContent = rsvpGuestCount;
+}
+
+guestMinus?.addEventListener("click", () => {
+  if (rsvpGuestCount > 0) {
+    rsvpGuestCount--;
+    updateGuestCount();
+  }
+});
+
+guestPlus?.addEventListener("click", () => {
+  if (rsvpGuestCount < 10) {
+    rsvpGuestCount++;
+    updateGuestCount();
+  }
+});
+
+rsvpForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = rsvpName.value.trim();
+
+  const attendingInput =
+    document.querySelector(
+      'input[name="attending"]:checked'
+    );
+
+  const mealInput =
+    document.querySelector(
+      'input[name="meal"]:checked'
+    );
+
+  if (!name || !attendingInput || !mealInput) {
+    alert("이름과 참석 여부를 확인해주세요.");
+    return;
+  }
+
+  const attending =
+    attendingInput.value === "true";
+
+  const meal =
+    mealInput.value === "true";
+
+  const submitButton =
+    rsvpForm.querySelector(
+      "button[type='submit']"
+    );
+
+  submitButton.disabled = true;
+  submitButton.textContent = "전달 중...";
+
+  const { error } = await db
+    .from("rsvp")
+    .insert([
+      {
+        name: name,
+        attending: attending,
+        guests: attending ? rsvpGuestCount : 0,
+        meal: attending ? meal : false,
+        message: rsvpMessage.value.trim() || null
+      }
+    ]);
+
+  if (error) {
+    console.error("참석 여부 등록 실패:", error);
+
+    alert(
+      "참석 여부 전달에 실패했습니다.\n잠시 후 다시 시도해주세요."
+    );
+
+    submitButton.disabled = false;
+    submitButton.textContent = "참석 여부 보내기";
+
+    return;
+  }
+
+  alert(
+    "참석 여부가 전달되었습니다.\n감사합니다. 💐"
+  );
+
+  rsvpForm.reset();
+
+  rsvpGuestCount = 0;
+  updateGuestCount();
+
+  submitButton.disabled = false;
+  submitButton.textContent = "참석 여부 보내기";
+});
 
 document.querySelectorAll("[data-scroll]").forEach(btn => {
   btn.addEventListener("click", () => {

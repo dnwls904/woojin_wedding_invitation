@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Wedding Admin</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="admin.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <main class="admin">
+
+    <p class="admin__eyebrow">
+      WEDDING ADMIN
+    </p>
+
+    <h1>
+      우진 &amp; 다영
+    </h1>
+
+    <p class="admin__date">
+      2027. 03. 27 · SATURDAY
+    </p>
+
+
+    <!-- 로그인 -->
+
+    <section
+      class="admin-login"
+      id="loginSection"
+    >
+
+      <h2>관리자 로그인</h2>
+
+      <p>
+        신랑·신부만 참석 현황을 확인할 수 있습니다.
+      </p>
+
+      <form id="loginForm">
+
+        <input
+          type="email"
+          id="email"
+          placeholder="이메일"
+          autocomplete="email"
+          required
+        >
+
+        <input
+          type="password"
+          id="password"
+          placeholder="비밀번호"
+          autocomplete="current-password"
+          required
+        >
+
+        <button
+          type="submit"
+          id="loginButton"
+        >
+          로그인
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- 통계 -->
+
+    <section
+      class="dashboard"
+      id="dashboard"
+      hidden
+    >
+
+      <div class="dashboard__header">
+
+        <div>
+          <p class="dashboard__eyebrow">
+            ATTENDANCE
+          </p>
+
+          <h2>
+            참석 현황
+          </h2>
+        </div>
+
+        <button
+          id="logoutButton"
+          class="logout-button"
+        >
+          로그아웃
+        </button>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <p>참석</p>
+          <strong id="attendingCount">0</strong>
+          <span>명</span>
+        </div>
+
+        <div class="stat-card">
+          <p>불참</p>
+          <strong id="notAttendingCount">0</strong>
+          <span>명</span>
+        </div>
+
+        <div class="stat-card">
+          <p>총 동반 인원</p>
+          <strong id="guestCount">0</strong>
+          <span>명</span>
+        </div>
+
+        <div class="stat-card">
+          <p>식사 예정</p>
+          <strong id="mealCount">0</strong>
+          <span>명</span>
+        </div>
+
+      </div>
+
+
+      <div class="response-list">
+
+        <div class="response-list__header">
+
+          <h3>
+            참석 응답
+          </h3>
+
+          <span id="responseCount">
+            0건
+          </span>
+
+        </div>
+
+        <div id="responseList">
+          <p class="empty-message">
+            아직 응답이 없습니다.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="admin.js"></script>
+
+</body>
+</html>

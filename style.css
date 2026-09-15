@@ -1019,3 +1019,157 @@ main {
   font-weight: 300;
   letter-spacing: 0.08em;
 }
+
+.rsvp {
+  text-align: center;
+}
+
+.rsvp__intro {
+  margin: 0 0 30px;
+  color: #8a837a;
+  font-size: 13px;
+  line-height: 1.9;
+  letter-spacing: -0.01em;
+}
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.rsvp-form > input,
+.rsvp-form > textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 1px solid #ddd7cf;
+  border-radius: 0;
+  background: transparent;
+  padding: 13px 4px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #4b4742;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+
+.rsvp-form > input::placeholder,
+.rsvp-form > textarea::placeholder {
+  color: #aaa49d;
+}
+
+.rsvp-form > input:focus,
+.rsvp-form > textarea:focus {
+  border-bottom-color: #a99f92;
+}
+
+.rsvp-form > textarea {
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.rsvp-choice {
+  padding: 0 4px;
+}
+
+.rsvp-label {
+  margin: 0 0 13px;
+  color: #6f6962;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.rsvp-choice label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-right: 18px;
+  color: #77716a;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.rsvp-choice input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #a99f92;
+}
+
+.guest-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.guest-count button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd7cf;
+  border-radius: 50%;
+  background: transparent;
+  color: #8a837a;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.guest-count button:active {
+  transform: scale(0.92);
+}
+
+.guest-count span {
+  min-width: 20px;
+  text-align: center;
+  color: #5f5952;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+}
+
+.rsvp-submit {
+  width: 100%;
+  margin-top: 4px;
+  padding: 13px 20px;
+  border: 1px solid #b8aea1;
+  border-radius: 30px;
+  background: #b8aea1;
+  color: #fff;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.rsvp-submit:hover {
+  background: #a79b8d;
+  box-shadow: 0 5px 14px rgba(100, 90, 80, 0.15);
+  transform: translateY(-1px);
+}
+
+.rsvp-submit:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.rsvp-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
