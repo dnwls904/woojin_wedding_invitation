@@ -715,3 +715,50 @@ guestbookForm?.addEventListener("submit", async (e) => {
 
 // 페이지가 열리면 방명록 불러오기
 loadGuestbook();
+
+
+// wedding calendar animation
+
+const calendar =
+  document.querySelector(".wedding-calendar");
+
+const calendarDays =
+  document.querySelectorAll(
+    ".wedding-calendar__days span"
+  );
+
+function animateCalendarDays() {
+  calendarDays.forEach((day, index) => {
+    if (!day.textContent.trim()) {
+      return;
+    }
+
+    setTimeout(() => {
+      day.classList.add("is-visible");
+    }, index * 70);
+  });
+}
+
+const calendarObserver =
+  new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          calendarDays.forEach((day) => {
+            day.classList.remove("is-visible");
+          });
+
+          setTimeout(() => {
+            animateCalendarDays();
+          }, 100);
+        }
+      });
+    },
+    {
+      threshold: 0.35
+    }
+  );
+
+if (calendar) {
+  calendarObserver.observe(calendar);
+}

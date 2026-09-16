@@ -1436,3 +1436,167 @@ main {
 
   cursor: pointer;
 }
+
+/* wedding calendar */
+
+.wedding-calendar {
+  width: min(100%, 330px);
+  margin: 26px auto 0;
+}
+
+.wedding-calendar__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 22px;
+  color: #625c55;
+}
+
+.wedding-calendar__header span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+}
+
+.wedding-calendar__header strong {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #aaa198;
+}
+
+.wedding-calendar__week,
+.wedding-calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.wedding-calendar__week {
+  margin-bottom: 10px;
+}
+
+.wedding-calendar__week span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #aaa198;
+}
+
+.wedding-calendar__days {
+  row-gap: 13px;
+}
+
+.wedding-calendar__days span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 auto;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 13px;
+  color: #827a72;
+}
+
+.wedding-calendar__days .wedding-calendar__today {
+  position: relative;
+  color: #625c55;
+  font-weight: 600;
+}
+
+.wedding-calendar__days .wedding-calendar__today::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #a85b5b;
+  border-radius: 50%;
+}
+
+.date-info {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.date-info__day {
+  margin: 0 0 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #9a9188;
+}
+
+.date-info__time {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #625c55;
+}
+
+.date-info .muted {
+  margin: 0;
+}
+
+/* wedding calendar animation */
+
+.wedding-calendar__days span {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.wedding-calendar__days span.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wedding-calendar__days .wedding-calendar__today.is-visible {
+  animation:
+    weddingDateHighlight 0.55s ease,
+    weddingDatePulse 1.2s ease-in-out 0.55s infinite;
+}
+
+@keyframes weddingDateHighlight {
+  0% {
+    transform: scale(0.85);
+  }
+
+  55% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes weddingDatePulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes weddingDateHighlight {
+  0% {
+    transform: scale(0.85);
+  }
+
+  55% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
