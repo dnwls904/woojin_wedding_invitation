@@ -1600,3 +1600,18 @@ main {
     transform: scale(1);
   }
 }
+
+.invitation h2,
+.invitation .body-copy {
+  font-family: "Hi Melody", sans-serif;
+}
+
+.hero h1 {
+  font-family: "Hi Melody", sans-serif;
+}
+
+.ending__message,
+.ending__thanks,
+.ending__names {
+  font-family: "Hi Melody", sans-serif;
+}
