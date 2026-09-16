@@ -1,53 +1,119 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#f8f6f2" />
   <meta name="description" content="우진 & 다영 모바일 청첩장" />
   <title>우진 & 다영 결혼식</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <main>
-      <section class="hero">
-        <img
-          src="images/main.jpg"
-          alt="두 사람의 대표 사진"
-          class="hero__image"
-          onerror="this.style.display='none'"
-        >
+  <!-- 참석 여부 팝업 -->
+  <div class="rsvp-modal" id="rsvpModal">
 
-        <div class="hero__overlay"></div>
+    <div class="rsvp-modal__box">
 
-        <div class="hero__content">
+      <p class="rsvp-modal__eyebrow">ATTENDANCE</p>
 
-          <p class="eyebrow">WEDDING INVITATION</p>
+      <button type="button" class="rsvp-modal__close" id="rsvpModalClose" aria-label="참석 여부 팝업 닫기">
+        ×
+      </button>
 
-          <p class="hero__subtitle">A NEW BEGINNING</p>
+      <h2>참석 여부를 알려주세요</h2>
 
-          <h1>우진 <span>&amp;</span> 다영</h1>
+      <p class="rsvp-modal__intro">
+        소중한 날 함께해 주실 수 있는지<br>
+        미리 알려주시면 감사하겠습니다.
+      </p>
 
-          <p class="hero__date">
-            2027. 03. 27
-            <span>·</span>
-            SATURDAY
-          </p>
+      <form id="rsvpForm">
 
-          <button
-            class="scroll-hint"
-            data-scroll="#invitation"
-            aria-label="청첩장 내용으로 이동"
-          >
-            SCROLL ↓
-          </button>
+        <input type="text" id="rsvpName" placeholder="이름" maxlength="20" required>
 
+        <div class="rsvp-choice">
+          <p class="rsvp-label">참석 여부</p>
+
+          <label>
+            <input type="radio" name="attending" value="true" required>
+            <span>참석합니다</span>
+          </label>
+
+          <label>
+            <input type="radio" name="attending" value="false">
+            <span>참석하지 못합니다</span>
+          </label>
         </div>
-      </section>
+
+        <div class="rsvp-choice">
+          <p class="rsvp-label">동반 인원 (본인제외)</p>
+
+          <div class="guest-count">
+            <button type="button" id="guestMinus">−</button>
+            <span id="guestCount">0</span>
+            <button type="button" id="guestPlus">＋</button>
+          </div>
+        </div>
+
+        <div class="rsvp-choice">
+          <p class="rsvp-label">식사 여부</p>
+
+          <label>
+            <input type="radio" name="meal" value="true" checked>
+            <span>식사합니다</span>
+          </label>
+
+          <label>
+            <input type="radio" name="meal" value="false">
+            <span>식사하지 않습니다</span>
+          </label>
+        </div>
+
+        <textarea id="rsvpMessage" placeholder="전달사항 (선택)" maxlength="300"></textarea>
+
+        <button type="submit" class="button rsvp-submit">
+          참석 여부 보내기
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+  <main>
+    <section class="hero">
+      <img src="images/main.jpg" alt="두 사람의 대표 사진" class="hero__image" onerror="this.style.display='none'">
+
+      <div class="hero__overlay"></div>
+
+      <div class="hero__content">
+
+        <p class="eyebrow">WEDDING INVITATION</p>
+
+        <p class="hero__subtitle">A NEW BEGINNING</p>
+
+        <h1>우진 <span>&amp;</span> 다영</h1>
+
+        <p class="hero__date">
+          2027. 03. 27
+          <span>·</span>
+          SATURDAY
+        </p>
+
+        <button class="scroll-hint" data-scroll="#invitation" aria-label="청첩장 내용으로 이동">
+          SCROLL ↓
+        </button>
+
+      </div>
+    </section>
 
 
     <section id="invitation" class="section invitation reveal">
@@ -60,13 +126,14 @@
         감사한 마음 오래도록 간직하겠습니다.
       </p>
       <div class="names">
-          <div><strong>신랑</strong> 우진</div>
+        <!--<div><strong>신랑</strong> 우진</div>
           <div><strong>신부</strong> 다영</div>
-
-          <!--
-          <div><strong>신랑</strong> ㅇㅇㅇ · ㅇㅇㅇ의 장남 우진 </div>
-          <div><strong>신부</strong> ㅇㅇㅇ · ㅇㅇㅇ의 막내 다영 </div>
           -->
+        <div class="names__parents">
+          <div><strong>신랑</strong> ㅇㅇㅇ · ㅇㅇㅇ의 장남 <strong>우진</strong></div>
+          <div><strong>신부</strong> ㅇㅇㅇ · ㅇㅇㅇ의 막내 <strong>다영</strong></div>
+        </div>
+
     </section>
 
     <section class="section date reveal reveal-scale">
@@ -127,121 +194,21 @@
         따뜻한 마음을 남겨주세요.
       </p>
 
-    <form id="guestbookForm" class="guestbook-form">
-      <input
-        type="text"
-        id="guestbookName"
-        placeholder="이름"
-        maxlength="20"
-        required
-      >
+      <form id="guestbookForm" class="guestbook-form">
+        <input type="text" id="guestbookName" placeholder="이름" maxlength="20" required>
 
-      <textarea
-        id="guestbookMessage"
-        placeholder="축하 메시지를 남겨주세요."
-        maxlength="300"
-        required
-      ></textarea>
+        <textarea id="guestbookMessage" placeholder="축하 메시지를 남겨주세요." maxlength="300" required></textarea>
 
-      <button type="submit" class="button guestbook-submit">
-        방명록 남기기
-      </button>
+        <button type="submit" class="button guestbook-submit">
+          방명록 남기기
+        </button>
       </form>
 
       <div id="guestbookList" class="guestbook-list"></div>
     </section>
 
-    <section class="section rsvp reveal">
-  <p class="section__eyebrow">ATTENDANCE</p>
-  <h2>참석 여부</h2>
 
-  <p class="rsvp__intro">
-    소중한 날, 함께해 주실 수 있는지<br>
-    참석 여부를 미리 알려주세요.
-  </p>
 
-  <form id="rsvpForm" class="rsvp-form">
-
-    <input
-      type="text"
-      id="rsvpName"
-      placeholder="이름"
-      maxlength="20"
-      required
-    >
-
-    <div class="rsvp-choice">
-      <p class="rsvp-label">참석 여부</p>
-
-      <label>
-        <input
-          type="radio"
-          name="attending"
-          value="true"
-          required
-        >
-        <span>참석합니다</span>
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          name="attending"
-          value="false"
-        >
-        <span>참석하지 못합니다</span>
-      </label>
-    </div>
-
-    <div class="rsvp-choice">
-      <p class="rsvp-label">동반 인원 (본인 제외)</p>
-
-      <div class="guest-count">
-        <button type="button" id="guestMinus">−</button>
-        <span id="guestCount">0</span>
-        <button type="button" id="guestPlus">＋</button>
-      </div>
-    </div>
-
-    <div class="rsvp-choice">
-      <p class="rsvp-label">식사 여부</p>
-
-      <label>
-        <input
-          type="radio"
-          name="meal"
-          value="true"
-          checked
-        >
-        <span>식사합니다</span>
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          name="meal"
-          value="false"
-        >
-        <span>식사하지 않습니다</span>
-      </label>
-    </div>
-
-    <textarea
-      id="rsvpMessage"
-      placeholder="전달사항 (선택)"
-      maxlength="300"
-    ></textarea>
-
-    <button
-      type="submit"
-      class="button rsvp-submit"
-    >
-      참석 여부 보내기
-    </button>
-
-  </form>
-</section>
-    
     <section class="section contact reveal">
       <p class="section__eyebrow">CONTACT</p>
       <h2>마음으로 함께해 주세요.</h2>
@@ -286,21 +253,21 @@
     </section>
 
     <section class="ending reveal">
-  <img src="images/ending.jpg" alt="두 사람의 마지막 사진" class="ending__image">
+      <img src="images/ending.jpg" alt="두 사람의 마지막 사진" class="ending__image">
 
-  <div class="ending__overlay"></div>
+      <div class="ending__overlay"></div>
 
-  <div class="ending__content">
-    <p class="ending__message">
-      저희의 새로운 시작을<br>
-      따뜻한 마음으로 축복해주세요.
-    </p>
+      <div class="ending__content">
+        <p class="ending__message">
+          저희의 새로운 시작을<br>
+          따뜻한 마음으로 축복해주세요.
+        </p>
 
-    <p class="ending__thanks">감사합니다.</p>
+        <p class="ending__thanks">감사합니다.</p>
 
-    <p class="ending__names">우진 &amp; 다영</p>
-  </div>
-</section>
+        <p class="ending__names">우진 &amp; 다영</p>
+      </div>
+    </section>
 
   </main>
 
@@ -315,4 +282,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

@@ -21,6 +21,31 @@ const guestPlus =
 
 let rsvpGuestCount = 0;
 
+// ==============================
+// RSVP 팝업
+// ==============================
+
+const rsvpModal =
+  document.getElementById("rsvpModal");
+
+  const rsvpModalClose =
+  document.getElementById("rsvpModalClose");
+
+rsvpModalClose?.addEventListener("click", () => {
+  closeRsvpModal();
+});
+
+document.body.style.overflow = "hidden";
+
+window.addEventListener("load", () => {
+  rsvpModal?.classList.add("is-open");
+});
+
+function closeRsvpModal() {
+  rsvpModal?.classList.remove("is-open");
+  document.body.style.overflow = "";
+}
+
 function updateGuestCount() {
   guestCountElement.textContent = rsvpGuestCount;
 }
@@ -106,6 +131,7 @@ rsvpForm?.addEventListener("submit", async (e) => {
 
   rsvpGuestCount = 0;
   updateGuestCount();
+  closeRsvpModal();
 
   submitButton.disabled = false;
   submitButton.textContent = "참석 여부 보내기";

@@ -60,6 +60,91 @@ const responseCount =
 const responseList =
   document.getElementById("responseList");
 
+// 방명록 요소
+
+const guestbookCount =
+  document.getElementById("guestbookCount");
+
+const adminGuestbookList =
+  document.getElementById("adminGuestbookList");
+
+const rsvpToggle =
+  document.getElementById("rsvpToggle");
+
+const rsvpContent =
+  document.getElementById("rsvpContent");
+
+const guestbookToggle =
+  document.getElementById("guestbookToggle");
+
+const guestbookContent =
+  document.getElementById("guestbookContent");
+
+
+function toggleSection(
+  section,
+  content,
+  otherSection,
+  otherContent,
+  button,
+  otherButton
+) {
+  const isOpen = !content.hidden;
+
+  content.hidden = isOpen;
+
+  section.classList.toggle(
+    "is-open",
+    !isOpen
+  );
+
+  button.querySelector(
+    ".admin-section__arrow"
+  ).textContent = isOpen ? "＋" : "−";
+
+
+  if (!isOpen) {
+    otherContent.hidden = true;
+
+    otherSection.classList.remove(
+      "is-open"
+    );
+
+    otherButton.querySelector(
+      ".admin-section__arrow"
+    ).textContent = "＋";
+  }
+}
+
+
+rsvpToggle.addEventListener(
+  "click",
+  () => {
+    toggleSection(
+      rsvpToggle.parentElement,
+      rsvpContent,
+      guestbookToggle.parentElement,
+      guestbookContent,
+      rsvpToggle,
+      guestbookToggle
+    );
+  }
+);
+
+
+guestbookToggle.addEventListener(
+  "click",
+  () => {
+    toggleSection(
+      guestbookToggle.parentElement,
+      guestbookContent,
+      rsvpToggle.parentElement,
+      rsvpContent,
+      guestbookToggle,
+      rsvpToggle
+    );
+  }
+);
 
 // 로그인
 
@@ -113,6 +198,7 @@ async function showDashboard() {
   dashboard.hidden = false;
 
   await loadRsvpData();
+  await loadGuestbookData();
 
 }
 
@@ -287,6 +373,129 @@ async function loadRsvpData() {
 
   });
 
+}
+
+async function loadGuestbookData() {
+  adminGuestbookList.innerHTML =
+    '<p class="empty-message">불러오는 중...</p>';
+
+  const { data, error } =
+    await db
+      .from("guestbook")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+  if (error) {
+    console.error(
+      "방명록 불러오기 실패:",
+      error
+    );
+
+    adminGuestbookList.innerHTML =
+      '<p class="empty-message">방명록을 불러오지 못했습니다.</p>';
+
+    return;
+  }
+
+  const messages = data || [];
+
+  guestbookCount.textContent =
+    `${messages.length}건`;
+
+  if (messages.length === 0) {
+    adminGuestbookList.innerHTML =
+      '<p class="empty-message">아직 방명록이 없습니다.</p>';
+
+    return;
+  }
+
+  adminGuestbookList.innerHTML = "";
+
+  messages.forEach((item) => {
+    const itemElement =
+      document.createElement("div");
+
+    itemElement.className =
+      "response-item";
+
+    const date =
+      new Date(item.created_at)
+        .toLocaleString("ko-KR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+    itemElement.innerHTML = `
+      <div class="response-item__top">
+        <span class="response-item__name">
+          ${escapeHtml(item.name)}
+        </span>
+
+        <button
+          type="button"
+          class="guestbook-delete"
+          data-id="${item.id}"
+        >
+          삭제
+        </button>
+      </div>
+
+      <div class="response-item__detail">
+        ${date}
+      </div>
+
+      <div class="response-item__message">
+        ${escapeHtml(item.message)}
+      </div>
+    `;
+
+    adminGuestbookList.appendChild(
+      itemElement
+    );
+  });
+
+  document
+    .querySelectorAll(".guestbook-delete")
+    .forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          deleteGuestbook(button.dataset.id);
+        }
+      );
+    });
+}
+
+async function deleteGuestbook(id) {
+  const confirmed =
+    confirm("이 방명록을 삭제할까요?");
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } =
+    await db
+      .from("guestbook")
+      .delete()
+      .eq("id", id);
+
+  if (error) {
+    console.error(
+      "방명록 삭제 실패:",
+      error
+    );
+
+    alert("방명록을 삭제하지 못했습니다.");
+    return;
+  }
+
+  await loadGuestbookData();
 }
 
 

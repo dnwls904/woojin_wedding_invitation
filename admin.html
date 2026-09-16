@@ -1,21 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Wedding Admin</title>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap"
-    rel="stylesheet"
-  >
+    rel="stylesheet">
 
   <link rel="stylesheet" href="admin.css">
 
@@ -41,10 +36,7 @@
 
     <!-- 로그인 -->
 
-    <section
-      class="admin-login"
-      id="loginSection"
-    >
+    <section class="admin-login" id="loginSection">
 
       <h2>관리자 로그인</h2>
 
@@ -54,26 +46,11 @@
 
       <form id="loginForm">
 
-        <input
-          type="email"
-          id="email"
-          placeholder="이메일"
-          autocomplete="email"
-          required
-        >
+        <input type="email" id="email" placeholder="이메일" autocomplete="email" required>
 
-        <input
-          type="password"
-          id="password"
-          placeholder="비밀번호"
-          autocomplete="current-password"
-          required
-        >
+        <input type="password" id="password" placeholder="비밀번호" autocomplete="current-password" required>
 
-        <button
-          type="submit"
-          id="loginButton"
-        >
+        <button type="submit" id="loginButton">
           로그인
         </button>
 
@@ -84,11 +61,7 @@
 
     <!-- 통계 -->
 
-    <section
-      class="dashboard"
-      id="dashboard"
-      hidden
-    >
+    <section class="dashboard" id="dashboard" hidden>
 
       <div class="dashboard__header">
 
@@ -102,10 +75,7 @@
           </h2>
         </div>
 
-        <button
-          id="logoutButton"
-          class="logout-button"
-        >
+        <button id="logoutButton" class="logout-button">
           로그아웃
         </button>
 
@@ -141,24 +111,45 @@
       </div>
 
 
-      <div class="response-list">
+      <div class="admin-section">
 
-        <div class="response-list__header">
+        <button type="button" class="admin-section__header" id="rsvpToggle">
+          <div>
+            <h3>참석 응답</h3>
+            <span id="responseCount">0건</span>
+          </div>
 
-          <h3>
-            참석 응답
-          </h3>
+          <span class="admin-section__arrow">＋</span>
+        </button>
 
-          <span id="responseCount">
-            0건
-          </span>
-
+        <div class="admin-section__content" id="rsvpContent" hidden>
+          <div id="responseList">
+            <p class="empty-message">
+              아직 응답이 없습니다.
+            </p>
+          </div>
         </div>
 
-        <div id="responseList">
-          <p class="empty-message">
-            아직 응답이 없습니다.
-          </p>
+      </div>
+
+
+      <div class="admin-section">
+
+        <button type="button" class="admin-section__header" id="guestbookToggle">
+          <div>
+            <h3>방명록 관리</h3>
+            <span id="guestbookCount">0건</span>
+          </div>
+
+          <span class="admin-section__arrow">＋</span>
+        </button>
+
+        <div class="admin-section__content" id="guestbookContent" hidden>
+          <div id="adminGuestbookList">
+            <p class="empty-message">
+              불러오는 중...
+            </p>
+          </div>
         </div>
 
       </div>
@@ -170,4 +161,5 @@
   <script src="admin.js"></script>
 
 </body>
+
 </html>
